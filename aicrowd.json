@@ -1,0 +1,7 @@
+{
+  "challenge_id": "airborne-detection-challenge",
+  "authors": ["aicrowd-bot"],
+  "tags": "change-me",
+  "description": "Random prediction model for Airborne challenge",
+  "gpu": false
+}
