@@ -1,0 +1,3 @@
+aicrowd_api
+coloredlogs
+matplotlib
