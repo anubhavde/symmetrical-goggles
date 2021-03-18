@@ -29,7 +29,6 @@ def time_limit(seconds):
 
 class AirbornePredictor:
     def __init__(self):
-        self.training_data_path = os.getenv("TRAINING_DATASET_PATH", os.getcwd() + "/data/train/")
         self.test_data_path = os.getenv("TEST_DATASET_PATH", os.getcwd() + "/data/val/")
         self.inference_output_path = os.getenv("INFERENCE_OUTPUT_PATH", os.getcwd() + "/data/results/result.csv")
         self.inference_setup_timeout = int(os.getenv("INFERENCE_SETUP_TIMEOUT_SECONDS", "600"))
