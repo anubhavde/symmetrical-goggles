@@ -1,3 +1,4 @@
 aicrowd_api
 coloredlogs
 matplotlib
+pandas
