@@ -3,6 +3,7 @@
 ### It will be over-writter during the evaluation, don't make any changes to this. ###
 ######################################################################################
 
+import json
 import traceback
 import pandas as pd
 import os
@@ -30,7 +31,7 @@ def time_limit(seconds):
 class AirbornePredictor:
     def __init__(self):
         self.test_data_path = os.getenv("TEST_DATASET_PATH", os.getcwd() + "/data/val/")
-        self.inference_output_path = get_results_directory()
+        self.inference_output_path = self.get_results_directory()
         self.inference_setup_timeout = int(os.getenv("INFERENCE_SETUP_TIMEOUT_SECONDS", "600"))
         self.inference_flight_timeout = int(os.getenv("INFERENCE_PER_FLIGHT_TIMEOUT_SECONDS", "1000"))
         self.results = []
@@ -52,8 +53,17 @@ class AirbornePredictor:
         if track_id is None:
             track_id = self.track_id_seq
             self.track_id_seq += 1
-        self.results.append([img_name, class_name, bbox[0], bbox[1], bbox[2], bbox[3], confidence, track_id])
-        self.current_flight_results.append([img_name, class_name, bbox[0], bbox[1], bbox[2], bbox[3], confidence, track_id])
+        result = {"detections": [
+                    { "x": bbox[0],
+                      "y": bbox[1],
+                      "w": bbox[2],
+                      "h": bbox[3],
+                      "track_id": track_id,
+                      "n": class_name,
+                      "s": confidence
+                    }], "img_name": img_name}
+        self.results.append(result)
+        self.current_flight_results.append(result)
 
 
     def evaluation(self):
@@ -78,9 +88,9 @@ class AirbornePredictor:
                     self.track_id_seq = 0
                     self.current_img_name = img_name
                     self.inference(flight_id, img_name)
-            save_results(flight_id)
+            self.save_results(flight_id)
 
-        save_results()
+        self.save_results()
         aicrowd_helpers.execution_success()
 
     def run(self):
@@ -113,12 +123,12 @@ class AirbornePredictor:
         Utility function: results directory path
         """
         root_directory = os.getenv("INFERENCE_OUTPUT_PATH", os.getcwd() + "/data/results/")
-        run_id = os.getenv("DATASET_ENV", "run1")
+        run_id = os.getenv("DATASET_ENV", "run0")
         results_directory = os.path.join(root_directory, run_id)
         if flight_id is not None:
-            results_directory = os.path.join(root_directory, flight_id)
-        if not os.path.exists(os.path.dirname(self.inference_output_path)):
-            os.makedirs(os.path.dirname(self.inference_output_path))
+            results_directory = os.path.join(results_directory, flight_id)
+        if not os.path.exists(results_directory):
+            os.makedirs(results_directory)
         return results_directory
 
     def save_results(self, flight_id=None):
@@ -127,13 +137,11 @@ class AirbornePredictor:
         This helps in giving continuous feedback in terms of approx scores and so on.
         """
         if flight_id is None:
-            submission_df = pd.DataFrame(self.results)
+            submission = self.results
         else:
-            submission_df = pd.DataFrame(self.current_flight_results)
+            submission = self.current_flight_results
 
-        submission_df.columns = ["img_name", "n", "x", "y", "w", "h", "s", "track_id"]
-        submission_df.to_csv(
-            get_results_directory(flight_id),
-            index=False,
-        )
+        with open(os.path.join(self.get_results_directory(flight_id), "result.json"), 'w') as fp:
+            json.dump(submission, fp)
+
         self.current_flight_results = []

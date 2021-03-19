@@ -16,12 +16,13 @@ COPY . ${HOME_DIR}
 RUN apt-get update && apt-get install -y \
   bzr \
   cvs \
+  procps \
+  vim \
   git \
   mercurial \
   subversion \
   && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get update && xargs apt-get install <apt.txt && rm -rf /var/lib/apt/lists/*
 RUN pip install -r ${HOME_DIR}/requirements.txt && rm -rf /root/.cache
 RUN chown ${HOST_UID}:${HOST_GID} -R ${HOME_DIR}
 
