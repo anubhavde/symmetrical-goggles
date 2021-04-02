@@ -1,9 +1,12 @@
 #!/usr/bin/env python
+# This file is the entrypoint for your submission.
+# You can modify this file to include your code or directly call your functions/modules from here.
 import random
 
 from evaluator import aicrowd_helpers
 from evaluator.airborne_detection import AirbornePredictor
 
+# TODO: You can name your implementation as you like.
 class RandomPredictor(AirbornePredictor):
 
     """
@@ -14,6 +17,7 @@ class RandomPredictor(AirbornePredictor):
     vocabulary_path = None
 
     """
+    TODO:
     You can do any preprocessing required for your codebase here like loading up models into memory, etc.
     """
     def predict_setup(self):
@@ -21,6 +25,7 @@ class RandomPredictor(AirbornePredictor):
         pass
 
     """
+    TODO:
     This function will be called for all the flights & img combination one by one during the evaluation.
     NOTE: In case you want to load your model, please do so in `predict_setup` function.
     """

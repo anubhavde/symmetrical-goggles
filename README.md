@@ -35,8 +35,7 @@ The main task of the competition is to detect a collision threat reliability. In
 ## Setup
 
 
-
-1.  **Clone the github repository** or press the "Use this Template" button on GitHub!
+1.  **Clone the github repository**
 
     ```
     git clone https://github.com/aicrowd/airborne_detection_starter_kit.git
@@ -50,13 +49,13 @@ The main task of the competition is to detect a collision threat reliability. In
 
 3. **Specify** your specific submission dependencies (PyTorch, Tensorflow, etc.)
 
-    * **Pip Packages** If you are using specific Python packages **make sure to add them to** `requirements.txt`! Here's an example:
+    * **Pip Packages** If you are using specific Python packages **make sure to add them to** `requirements.txt` of your codebase. The forked repository will have an existing `requirements.txt` which you can modify ! Here's an example:
       ```
       # requirements.txt
       matplotlib
       tensorflow
       ```
-    * **Apt Packages** If your training procedure or agent depends on specific Debian (Ubuntu, etc.) packages, add them to `apt.txt`.
+    * **Apt Packages** If your testing procedure depends on specific Debian (Ubuntu, etc.) packages, add them to `apt.txt`.
 
     * **Anaconda Environment**.
         * **Create your new conda environment**
@@ -70,11 +69,13 @@ The main task of the competition is to detect a collision threat reliability. In
         ```sh
         conda install <your-package>
         ```
+    * [Advanced Usage](https://discourse.aicrowd.com/t/how-to-specify-runtime-environment-for-your-submission/2274)
 
 
 ## How do I specify my software runtime ?
 
-As mentioned above, **the software runtime is specified in 3 places**: 
+**The software runtime is specified in 3 places for majority of the cases**: 
+
 * `environment.yml` -- The _optional_ Anaconda environment specification. 
     As you add new requirements you can export your `conda` environment to this file!
     ```
@@ -83,13 +84,13 @@ As mentioned above, **the software runtime is specified in 3 places**:
 * `requirements.txt` -- The `pip3` packages used by your inference code. **Note that dependencies specified by `environment.yml` take precedence over `requirements.txt`.** As you add new pip3 packages to your inference procedure either manually add them to `requirements.txt` or if your software runtime is simple, perform:
     ```
     # Put ALL of the current pip3 packages on your system in the submission
-    pip3 freeze > requirements.txt
+    pip3 freeze >> requirements.txt
     ```
 
 * `apt.txt` -- The Debian packages (via aptitude) used by your inference code!
 
 
-These files are used to construct both the **local and AIcrowd docker containers** in which your code will run. 
+These files are used to construct your **AIcrowd submission docker containers** in which your code will run. In case you are advanced user, you can check other methods to specify the runtime [here](https://discourse.aicrowd.com/t/how-to-specify-runtime-environment-for-your-submission/2274), which includes adding your own `Dockerfile` directly.
 
 
 ## What should my code structure be like ?
@@ -105,11 +106,9 @@ The different files and directories have following meaning:
 ├── requirements.txt       # Python packages to be installed
 ├── test.py                # IMPORTANT: Your testing/inference phase code, must be derived from AirbornePredictor (example in test.py)
 └── utility                # The utility scripts to provide smoother experience to you.
-    ├── debug_build.sh
+    ├── docker_build.sh
     ├── docker_run.sh
     ├── environ.sh
-    ├── local_evaluate.sh        # TBA
-    ├── docker_local_evaluate.sh # TBA
     └── verify_or_download_data.sh
 ```
 
@@ -133,21 +132,29 @@ Please specify if your code will use a GPU or not for the evaluation of your mod
 
 ### Dataset location
 
-You **don't** need to upload the data set in submission. For local training and evaluations, you can download it once in your system via `python ./utility/verify_or_download_data.py` or place manually into `data/` folder.
+You **don't** need to upload the data set in submission. For local training, you can download it once in your system via `python ./utility/verify_or_download_data.py` or place manually into `data/` folder.
 
 
-## Training and Testing Code Entrypoint (where you write your code!)
+## Submission Entrypoint (where you write your code!)
 
-The evaluator will use `test.py` as the entrypoint for testing stage, so please remember to include the files in your submission!
+The evaluator will execute `run.sh` for generating predictions, so please remember to include it in your submission!
 
-The inline documentation in these files will guide you in interfacing with evaluator properly.
+The inline documentation of `test.py` will guide you with interfacing with the codebase properly. You can check TODOs inside it to learn about the functions you need to implement.
 
-## IMPORTANT: Saving Models during Training!
+You can modify the existing `test.py` OR copy it (to say `your_code.py`) and change it.
+
+The file should adhere to the following constraints:
+1. Derived from `AirbornePredictor` class
+2. `inference` function needs to be implemented
+
+Once done, you can specify the file you want to run in `run.sh` (by default, it is `test.py` i.e. Random Predictions).
+
+## IMPORTANT: Saving Models before submission!
 
 Before you submit make sure that you have saved your models, which are needed by your inference code.
 In case your files are larger in size you can use `git-lfs` to upload them. More details [here](https://discourse.aicrowd.com/t/how-to-upload-large-files-size-to-your-submission/2304).
 
-## How to submit a trained agent!
+## How to submit a trained model!
 
 To make a submission, you will have to create a **private** repository on [https://gitlab.aicrowd.com/](https://gitlab.aicrowd.com/).
 
@@ -159,7 +166,7 @@ Then you can create a submission by making a _tag push_ to your repository on [h
 Then you can add the correct git remote, and finally submit by doing :
 
 ```
-cd competition_submission_starter_template
+cd airborne_detection_starter_template
 # Add AIcrowd git remote endpoint
 git remote add aicrowd git@gitlab.aicrowd.com:<YOUR_AICROWD_USER_NAME>/airborne_detection_starter_template.git
 git push aicrowd master
@@ -182,7 +189,7 @@ In the link above, you should start seeing something like this take shape (each 
 ![](https://i.imgur.com/FqScw4m.png)
 
 and if everything works out correctly, then you should be able to see the final scores like this :
-![](https://i.imgur.com/56Leaya.jpg)
+![](https://i.imgur.com/SgKHHsB.png)
 
 **Best of Luck** :tada: :tada:
 
@@ -190,9 +197,7 @@ and if everything works out correctly, then you should be able to see the final 
 
 ## Time constraints
 
-You are expected to train your model online using the training phase docker container and output the trained model in `train/` directory.
-
-You need to make sure that your model can predict for each sample within 10 seconds, otherwise the submission will be mark as failed. (_need revision on timeouts based on budget_)
+You need to make sure that your model can predict for each frame within 1 second, otherwise the submission will be mark as failed. (_need revision on timeouts based on budget_)
 
 ## Local evaluation
 
