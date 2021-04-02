@@ -1,4 +1,4 @@
-![Airborne Banner](https://images.aicrowd.com/raw_images/challenges/banner_file/753/353562600db278fe4cd7.jpg)
+![Airborne Banner](https://i.imgur.com/noxkEgb.png)
 
 # Airborne Object Tracking Starter Kit
 
