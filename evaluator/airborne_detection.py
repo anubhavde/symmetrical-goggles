@@ -1,6 +1,7 @@
 ######################################################################################
-### This is read-only file so participants can run their codes locally.            ###
-### It will be over-writter during the evaluation, don't make any changes to this. ###
+### This is a read-only file to allow participants to run their code locally.      ###
+### It will be over-writter during the evaluation, Please do not make any changes  ###
+### to this file.                                                                  ###
 ######################################################################################
 
 import json
@@ -44,7 +45,7 @@ class AirbornePredictor:
         """
         Register all your tracking results to this function.
            `track_id` (optional): unique id for your detected airborne object
-           `img_name` (optional): this prediction belong to which image? default being the current image passed
+           `img_name` (optional): The image_name to which this prediction belongs. This default being the current image being processed.
         """
         assert 0 < confidence < 1
         assert class_name is not None
@@ -78,7 +79,7 @@ class AirbornePredictor:
             print("inference_setup doesn't exist for this run, skipping...")
 
         aicrowd_helpers.execution_running()
-
+        
         flights = [f for f in listdir(self.test_data_path) if not isfile(join(self.test_data_path, f))]
 
         for flight_id in flights:
