@@ -106,14 +106,15 @@ class AirbornePredictor:
 
     def inference_setup(self):
         """
-        You can do any preprocessing required for your codebase here like loading up models into memory, etc.
+        You can do any preprocessing required for your codebase here : 
+            like loading your models into memory, etc.
         """
         raise NotImplementedError
 
 
     def inference(self, flight_id, img_name):
         """
-        This function will be called for all the flights one by one during the evaluation.
+        This function will be called for all the flight frames sequentially during the evaluation.
         NOTE: In case you want to load your model, please do so in `inference_setup` function.
         """
         raise NotImplementedError
@@ -135,7 +136,8 @@ class AirbornePredictor:
     def save_results(self, flight_id=None):
         """
         Utility function: save results in nested direcotry based on flight_id
-        This helps in giving continuous feedback in terms of approx scores and so on.
+        This helps in giving continuous feedback based on of the approximate 
+        scores.
         """
         if flight_id is None:
             submission = self.results
