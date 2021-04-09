@@ -34,20 +34,23 @@ The main task of the competition is to detect a collision threat reliability. In
 
 ## Setup
 
+1. **Add your SSH key** to AIcrowd GitLab
 
-1.  **Clone the github repository**
+You will have to add your SSH Keys to your GitLab account by going to your profile settings [here](https://gitlab.aicrowd.com/profile/keys). If you do not have SSH Keys, you will first need to [generate one](https://docs.gitlab.com/ee/ssh/README.html#generating-a-new-ssh-key-pair).
+
+2.  **Clone the github repository**
 
     ```
-    git clone https://github.com/aicrowd/airborne_detection_starter_kit.git
+    git clone git@gitlab.aicrowd.com:amazon-prime-air/airborne-detection-starter-kit.git
     ```
 
-2. **Install** competition specific dependencies!
+3. **Install** competition specific dependencies!
     ```
     cd airborne_detection_starter_kit
     pip3 install -r requirements.txt
     ```
 
-3. **Specify** your specific submission dependencies (PyTorch, Tensorflow, etc.)
+4. **Specify** your specific submission dependencies (PyTorch, Tensorflow, etc.)
 
     * **Pip Packages** If you are using specific Python packages **make sure to add them to** `requirements.txt` of your codebase. The forked repository will have an existing `requirements.txt` which you can modify ! Here's an example:
       ```
@@ -158,8 +161,7 @@ In case your files are larger in size you can use `git-lfs` to upload them. More
 
 To make a submission, you will have to create a **private** repository on [https://gitlab.aicrowd.com/](https://gitlab.aicrowd.com/).
 
-You will have to add your SSH Keys to your GitLab account by going to your profile settings [here](https://gitlab.aicrowd.com/profile/keys).
-If you do not have SSH Keys, you will first need to [generate one](https://docs.gitlab.com/ee/ssh/README.html#generating-a-new-ssh-key-pair).
+You will have to add your SSH Keys to your GitLab account by going to your profile settings [here](https://gitlab.aicrowd.com/profile/keys). If you do not have SSH Keys, you will first need to [generate one](https://docs.gitlab.com/ee/ssh/README.html#generating-a-new-ssh-key-pair).
 
 Then you can create a submission by making a _tag push_ to your repository on [https://gitlab.aicrowd.com/](https://gitlab.aicrowd.com/).
 **Any tag push (where the tag name begins with "submission-") to your private repository is considered as a submission**  
