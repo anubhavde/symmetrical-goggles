@@ -177,6 +177,10 @@ aws s3 sync s3://airborne-obj-detection-challenge-training/part1 part2/ --no-sig
 aws s3 sync s3://airborne-obj-detection-challenge-training/part1 part3/ --no-sign-request
 ```
 
+## Additional details about the dataset
+
+Please note that the entire training contains ~ 12TB. To experiment with less flights / images, please review `valid_encounters_maxRange700_maxGap3_minEncLen30.json` (provided in each training folder), which contains information about encounters (defined in the Benchmarks section). For each encounter, we provide the corresponding sequence (sub-folder) name, relevant image names and additional information on distance statistics of aircraft in the encounter, if the encounter is below or above horizon and its length in frames. The provided baseline used only the images (frames) that correspond to the encounters, those are a good start for participant’s first training.
+
 -----
 
 👋 In case you have any doubts or need help, you can reach out to us via Challenge [Discussions](https://www.aicrowd.com/challenges/airborne-object-tracking-challenge/discussion) or [Discord](https://discord.gg/BT9uegr).

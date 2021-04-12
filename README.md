@@ -117,7 +117,7 @@ Please specify if your code will use a GPU or not for the evaluation of your mod
 
 ## Time constraints
 
-You need to make sure that your model can predict for each frame within 1 second, otherwise the submission will be mark as failed. (_need revision on timeouts based on budget_)
+You need to make sure that your model can predict airborne objects for each flight within 1000 second, otherwise the submission will be mark as failed. (_need revision on timeouts based on budget_)
 
 ## Local evaluation
 

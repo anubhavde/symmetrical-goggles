@@ -37,6 +37,7 @@ class AirbornePredictor:
         self.inference_output_path = self.get_results_directory()
         self.inference_setup_timeout = int(os.getenv("INFERENCE_SETUP_TIMEOUT_SECONDS", "600"))
         self.inference_flight_timeout = int(os.getenv("INFERENCE_PER_FLIGHT_TIMEOUT_SECONDS", "1000"))
+        self.partial_run = os.getenv("PARTIAL_RUN_FLIGHTS", None)
         self.results = []
         self.current_flight_results = []
         self.current_img_name = None
@@ -71,10 +72,14 @@ class AirbornePredictor:
         self.current_flight_results.append(result)
 
     def get_all_flight_ids(self):
+        valid_flight_ids = None
+        if self.partial_run:
+            valid_flight_ids = self.partial_run.split(',')
         flight_ids = []
         for folder in listdir(self.test_data_path):
             if not isfile(join(self.test_data_path, folder)):
-                flight_ids.append(folder)
+                if valid_flight_ids is None or folder in valid_flight_ids:
+                    flight_ids.append(folder)
         return flight_ids
 
     def get_all_frame_images(self, flight_id):
@@ -87,6 +92,9 @@ class AirbornePredictor:
 
     def get_frame_image_location(self, flight_id, frame_id):
         return join(self.test_data_path, flight_id, frame_id)
+
+    def get_flight_folder_location(self, flight_id):
+        return join(self.test_data_path, flight_id)
 
     def evaluation(self):
         """
