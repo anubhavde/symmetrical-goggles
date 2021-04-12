@@ -2,6 +2,8 @@
 
 # Airborne Object Tracking Starter Kit
 
+👉 [Challenge page](https://www.aicrowd.com/challenges/airborne-object-tracking-challenge?utm_source=starter-kit&utm_medium=click&utm_campaign=prime-air)
+
 [![Discord](https://img.shields.io/discord/565639094860775436.svg)](https://discord.gg/BT9uegr)
 
 
