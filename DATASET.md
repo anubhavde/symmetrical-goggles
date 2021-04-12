@@ -179,4 +179,4 @@ aws s3 sync s3://airborne-obj-detection-challenge-training/part1 part3/ --no-sig
 
 -----
 
-In case you have any doubts or need help, you can reach out to us via Challenge [Discussions](https://www.aicrowd.com/challenges/airborne-object-tracking-challenge/discussion) or [Discord](#tba).
+👋 In case you have any doubts or need help, you can reach out to us via Challenge [Discussions](https://www.aicrowd.com/challenges/airborne-object-tracking-challenge/discussion) or [Discord](https://discord.gg/BT9uegr).

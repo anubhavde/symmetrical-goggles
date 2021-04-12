@@ -27,18 +27,23 @@ The main task of the competition is to detect a collision threat reliability. In
 
 1. **Sign up** to join the competition [on the AIcrowd website].(https://www.aicrowd.com/challenges/airborne-object-tracking-challenge)
 2. **Clone** this repo and start developing your submissions.
-3. **Train** your models to detect objects using the `train_locally.sh`.
+3. **Train** your models to detect objects and write inference code in `test.py`.
 4. [**Submit**](#how-to-submit-a-model) your trained models to [AIcrowd Gitlab](https://gitlab.aicrowd.com) for evaluation [(full instructions below)](#how-to-submit-a-model).  The automated evaluation setup will evaluate the submissions against the test dataset, to compute and report the metrics on the leaderboard of the competition.
 
-# How to Submit a Model!
+# How to access and use dataset
+
+The starter kit contains dataset exploration notebooks and helper functions to access the dataset.
+You can check the instructions for the same here: 👉 [DATASET.md](/DATASET.md).
+
+# How to start participating
 
 ## Setup
 
 1. **Add your SSH key** to AIcrowd GitLab
 
-You will have to add your SSH Keys to your GitLab account by going to your profile settings [here](https://gitlab.aicrowd.com/profile/keys). If you do not have SSH Keys, you will first need to [generate one](https://docs.gitlab.com/ee/ssh/README.html#generating-a-new-ssh-key-pair).
+You can add your SSH Keys to your GitLab account by going to your profile settings [here](https://gitlab.aicrowd.com/profile/keys). If you do not have SSH Keys, you will first need to [generate one](https://docs.gitlab.com/ee/ssh/README.html#generating-a-new-ssh-key-pair).
 
-2.  **Clone the github repository**
+2.  **Clone the repository**
 
     ```
     git clone git@gitlab.aicrowd.com:amazon-prime-air/airborne-detection-starter-kit.git
@@ -50,51 +55,19 @@ You will have to add your SSH Keys to your GitLab account by going to your profi
     pip3 install -r requirements.txt
     ```
 
-4. **Specify** your specific submission dependencies (PyTorch, Tensorflow, etc.)
-
-    * **Pip Packages** If you are using specific Python packages **make sure to add them to** `requirements.txt` of your codebase. The forked repository will have an existing `requirements.txt` which you can modify ! Here's an example:
-      ```
-      # requirements.txt
-      matplotlib
-      tensorflow
-      ```
-    * **Apt Packages** If your testing procedure depends on specific Debian (Ubuntu, etc.) packages, add them to `apt.txt`.
-
-    * **Anaconda Environment**.
-        * **Create your new conda environment**
-
-            ```sh
-            conda create --name airborne_challenge
-            conda activate airborne_challenge
-            ```
-
-      * **Your code specific dependencies**
-        ```sh
-        conda install <your-package>
-        ```
-    * [Advanced Usage](https://discourse.aicrowd.com/t/how-to-specify-runtime-environment-for-your-submission/2274)
+4. **Run local exploration notebook** present in `data/dataset-playground.ipynb` using `jupyter notebook` command locally.
 
 
-## How do I specify my software runtime ?
-
-**The software runtime is specified in 3 places for majority of the cases**: 
-
-* `environment.yml` -- The _optional_ Anaconda environment specification. 
-    As you add new requirements you can export your `conda` environment to this file!
-    ```
-    conda env export --no-build > environment.yml
-    ```
-* `requirements.txt` -- The `pip3` packages used by your inference code. **Note that dependencies specified by `environment.yml` take precedence over `requirements.txt`.** As you add new pip3 packages to your inference procedure either manually add them to `requirements.txt` or if your software runtime is simple, perform:
-    ```
-    # Put ALL of the current pip3 packages on your system in the submission
-    pip3 freeze >> requirements.txt
-    ```
-
-* `apt.txt` -- The Debian packages (via aptitude) used by your inference code!
+5. Try out random prediction codebase present in `test.py`.
 
 
-These files are used to construct your **AIcrowd submission docker containers** in which your code will run. In case you are advanced user, you can check other methods to specify the runtime [here](https://discourse.aicrowd.com/t/how-to-specify-runtime-environment-for-your-submission/2274), which includes adding your own `Dockerfile` directly.
+## How do I specify my software runtime / dependencies ?
 
+We accept submissions with custom runtime, so you don't need to worry about which libraries or framework to pick from.
+
+The configuration files typically includes `requirements.txt` (pypi packages), `environment.yml` (conda environment), `apt.txt` (apt packages) or even your own `Dockerfile`.
+
+You can check detailed information about the same in 👉 [RUNTIME.md](/RUNTIME.md) file.
 
 ## What should my code structure be like ?
 
@@ -105,7 +78,7 @@ The different files and directories have following meaning:
 .
 ├── aicrowd.json           # Submission meta information like your username
 ├── apt.txt                # Packages to be installed inside docker image
-├── data                   # The downloaded dataset, the path to directory is also available as `DATASET_LOCATION` env variable
+├── data                   # Your local dataset copy, you don't need to upload it (read DATASET.md)
 ├── requirements.txt       # Python packages to be installed
 ├── test.py                # IMPORTANT: Your testing/inference phase code, must be derived from AirbornePredictor (example in test.py)
 └── utility                # The utility scripts to provide smoother experience to you.
@@ -132,10 +105,6 @@ The `aicrowd.json` of each submission should contain the following content:
 This JSON is used to map your submission to the said challenge, so please remember to use the correct `challenge_id` as specified above.
 
 Please specify if your code will use a GPU or not for the evaluation of your model. If you specify `true` for the GPU, GPU will be provided and used for the evaluation.
-
-### Dataset location
-
-You **don't** need to upload the data set in submission. For local training, you can download it once in your system via `python ./utility/verify_or_download_data.py` or place manually into `data/` folder.
 
 
 ## Submission Entrypoint (where you write your code!)
@@ -185,7 +154,8 @@ git push aicrowd submission-v0.1
 You now should be able to see the details of your submission at :
 [gitlab.aicrowd.com/<YOUR_AICROWD_USER_NAME>/airborne_detection_starter_template/issues](gitlab.aicrowd.com//<YOUR_AICROWD_USER_NAME>/airborne_detection_starter_template/issues)
 
-**NOTE**: Remember to update your username in the link above :wink:
+**NOTE**: Remember to update your username instead of `<YOUR_AICROWD_USER_NAME>` above :wink:
+
 
 In the link above, you should start seeing something like this take shape (each of the steps can take a bit of time, so please be patient too :wink: ) :
 ![](https://i.imgur.com/FqScw4m.png)
