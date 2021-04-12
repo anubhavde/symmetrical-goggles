@@ -5,6 +5,8 @@ from PIL import Image
 import numpy
 import multiprocessing
 import boto3
+from botocore import UNSIGNED
+from botocore.client import Config
 from loguru import logger
 
 
@@ -17,7 +19,7 @@ class FileHandler:
 
     @staticmethod
     def init_s3_client():
-        s3_client = boto3.client('s3')
+        s3_client = boto3.client('s3', config=Config(signature_version=UNSIGNED))
         return s3_client
 
     @staticmethod
@@ -71,7 +73,7 @@ class FileHandler:
     def _download_from_s3(config):
         if os.path.isfile(config[2]):
             return
-        s3_client = boto3.client('s3')
+        s3_client = boto3.client('s3', config=Config(signature_version=UNSIGNED))
         s3_client.download_file(config[0], config[1], config[2])
 
     def download_from_s3_parallel(self, paths, parallel=None):
