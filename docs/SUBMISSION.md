@@ -54,7 +54,13 @@ You now should be able to see the details of your submission at :
 
 **NOTE**: Remember to update your username instead of `<YOUR_AICROWD_USER_NAME>` above :wink:
 
+After completing above steps, you should start seeing something like below to take shape in your Repository -> Issues page:
+![](https://i.imgur.com/FqScw4m.png)
+
+and if everything works out correctly, then you should be able to see the final scores like this :
+![](https://i.imgur.com/SgKHHsB.png)
+
 ### Other helpful files
 
-👉 [DATASET.md](/DATASET.md)
-👉 [RUNTIME.md](/RUNTIME.md)
+👉 [DATASET.md](/docs/DATASET.md)
+👉 [RUNTIME.md](/docs/RUNTIME.md)

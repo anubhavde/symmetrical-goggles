@@ -33,7 +33,7 @@ The main task of the competition is to detect a collision threat reliability. In
 # How to access and use dataset
 
 The starter kit contains dataset exploration notebooks and helper functions to access the dataset.
-You can check the instructions for the same here: 👉 [DATASET.md](/DATASET.md).
+You can check the instructions for the same here: 👉 [DATASET.md](/docs/DATASET.md).
 
 # How to start participating
 
@@ -67,7 +67,7 @@ We accept submissions with custom runtime, so you don't need to worry about whic
 
 The configuration files typically includes `requirements.txt` (pypi packages), `environment.yml` (conda environment), `apt.txt` (apt packages) or even your own `Dockerfile`.
 
-You can check detailed information about the same in 👉 [RUNTIME.md](/RUNTIME.md) file.
+You can check detailed information about the same in 👉 [RUNTIME.md](/docs/RUNTIME.md) file.
 
 ## What should my code structure be like ?
 
@@ -108,13 +108,8 @@ Please specify if your code will use a GPU or not for the evaluation of your mod
 
 ## How to make submission
 
-👉 [SUBMISSION.md](/SUBMISSION.md)
+👉 [SUBMISSION.md](/docs/SUBMISSION.md)
 
-After completing above steps, you should start seeing something like below to take shape in your Repository -> Issues page:
-![](https://i.imgur.com/FqScw4m.png)
-
-and if everything works out correctly, then you should be able to see the final scores like this :
-![](https://i.imgur.com/SgKHHsB.png)
 
 **Best of Luck** :tada: :tada:
 
