@@ -15,6 +15,18 @@ Clone the repository to compete now!
 *  **Starter code** for you to get started!
 
 
+# Table of Contents
+
+1. [Competition Procedure](#competition-procedure)
+2. [How to access and use dataset](#how-to-access-and-use-dataset)
+3. [How to start participating](#how-to-start-participating)
+4. [How do I specify my software runtime / dependencies?](#how-do-i-specify-my-software-runtime-dependencies-)
+5. [What should my code structure be like ?](#what-should-my-code-structure-be-like-)
+6. [How to make submission](#how-to-make-submission)
+7. [Other concepts](#other-concepts)
+8. [Important links](#-important-links)
+
+
 ![](https://i.imgur.com/fscUnZp.png)
 
 #  Competition Procedure
