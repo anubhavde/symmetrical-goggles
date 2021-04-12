@@ -6,7 +6,6 @@
 
 import json
 import traceback
-import pandas as pd
 import os
 import signal
 from contextlib import contextmanager
@@ -15,12 +14,15 @@ from os.path import isfile, join
 
 from evaluator import aicrowd_helpers
 
+
 class TimeoutException(Exception): pass
+
 
 @contextmanager
 def time_limit(seconds):
     def signal_handler(signum, frame):
         raise TimeoutException("Prediction timed out!")
+
     signal.signal(signal.SIGALRM, signal_handler)
     signal.alarm(seconds)
     try:
@@ -40,32 +42,51 @@ class AirbornePredictor:
         self.current_img_name = None
         self.track_id_seq = 0
 
-
-    def register_object_and_location(self, class_name, bbox, confidence, track_id=None, img_name=None):
+    def register_object_and_location(self, class_name, track_id, bbox, confidence, img_name):
         """
         Register all your tracking results to this function.
-           `track_id` (optional): unique id for your detected airborne object
-           `img_name` (optional): The image_name to which this prediction belongs. This default being the current image being processed.
+           `track_id`: unique id for your detected airborne object
+           `img_name`: The image_name to which this prediction belongs.
         """
         assert 0 < confidence < 1
-        assert class_name is not None
+        assert track_id is not None
         if img_name is None:
             img_name = self.current_img_name
-        if track_id is None:
-            track_id = self.track_id_seq
-            self.track_id_seq += 1
-        result = {"detections": [
-                    { "x": bbox[0],
-                      "y": bbox[1],
-                      "w": bbox[2],
-                      "h": bbox[3],
-                      "track_id": track_id,
-                      "n": class_name,
-                      "s": confidence
-                    }], "img_name": img_name}
+
+        result = {
+            "detections": [
+                {
+                    "track_id": track_id,
+                    "x": bbox[0],
+                    "y": bbox[1],
+                    "w": bbox[2],
+                    "h": bbox[3],
+                    "n": class_name,
+                    "s": confidence
+                }
+            ],
+            "img_name": img_name
+        }
         self.results.append(result)
         self.current_flight_results.append(result)
 
+    def get_all_flight_ids(self):
+        flight_ids = []
+        for folder in listdir(self.test_data_path):
+            if not isfile(join(self.test_data_path, folder)):
+                flight_ids.append(folder)
+        return flight_ids
+
+    def get_all_frame_images(self, flight_id):
+        frames = []
+        flight_folder = join(self.test_data_path, flight_id)
+        for frame in listdir(flight_folder):
+            if isfile(join(flight_folder, frame)):
+                frames.append(frame)
+        return frames
+
+    def get_frame_image_location(self, flight_id, frame_id):
+        return join(self.test_data_path, flight_id, frame_id)
 
     def evaluation(self):
         """
@@ -79,17 +100,14 @@ class AirbornePredictor:
             print("inference_setup doesn't exist for this run, skipping...")
 
         aicrowd_helpers.execution_running()
-        
-        flights = [f for f in listdir(self.test_data_path) if not isfile(join(self.test_data_path, f))]
 
-        for flight_id in flights:
-            img_names = [f for f in listdir(self.test_data_path + flight_id) if isfile(join(self.test_data_path + flight_id, f))]
+        flights = self.get_all_flight_ids()
+
+        for flight in flights:
             with time_limit(self.inference_flight_timeout):
-                for img_name in img_names:
-                    self.track_id_seq = 0
-                    self.current_img_name = img_name
-                    self.inference(flight_id, img_name)
-            self.save_results(flight_id)
+                self.inference(flight)
+                
+            self.save_results(flight)
 
         self.save_results()
         aicrowd_helpers.execution_success()
@@ -111,14 +129,12 @@ class AirbornePredictor:
         """
         raise NotImplementedError
 
-
-    def inference(self, flight_id, img_name):
+    def inference(self, flight_id):
         """
-        This function will be called for all the flight frames sequentially during the evaluation.
+        This function will be called for all the flight during the evaluation.
         NOTE: In case you want to load your model, please do so in `inference_setup` function.
         """
         raise NotImplementedError
-
 
     def get_results_directory(self, flight_id=None):
         """
