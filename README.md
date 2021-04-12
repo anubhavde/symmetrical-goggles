@@ -17,6 +17,7 @@ Clone the repository to compete now!
 *  **Starter code** for you to get started!
 
 
+
 # Table of Contents
 
 1. [Competition Procedure](#competition-procedure)
@@ -29,7 +30,8 @@ Clone the repository to compete now!
 8. [Important links](#-important-links)
 
 
-![](https://i.imgur.com/fscUnZp.png)
+<p style="text-align:center"><img style="text-align:center" src="https://images.aicrowd.com/dataset_files/challenge_753/493d98aa-b7e5-45f8-aed1-640e4768f647_video.gif"  width="1024"></p>
+
 
 #  Competition Procedure
 
