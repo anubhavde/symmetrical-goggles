@@ -110,14 +110,9 @@ class Flight:
         os.chdir(flight_folder)
         if not os.path.isfile(flight_folder + 'flight.mp4'):
             logger.info("Generating video...")
-            process = subprocess.Popen(" ".join([
+            os.system(" ".join([
                 'ffmpeg', '-framerate', str(10*speed_x), '-pattern_type', 'glob', '-i', "'*.png'", '-c:v', 'libx264',
                 '-r', str(10*speed_x), '-pix_fmt', 'yuv420p', 'flight.mp4'
-            ]), stderr=subprocess.PIPE, shell=True)
-            while True:
-                if process.poll() is not None:
-                    break
-                logger.info(process.stdout)
-                logger.info(process.stderr)
+            ]))
         os.chdir(cur_dir)
         return flight_folder + '/flight.mp4'
