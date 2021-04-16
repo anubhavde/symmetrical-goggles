@@ -9,4 +9,3 @@ bounding-box
 numpy
 Pillow
 imgaug
-core/metrics
