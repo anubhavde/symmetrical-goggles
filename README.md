@@ -1,19 +1,19 @@
 ![Airborne Banner](https://i.imgur.com/MxW7ySd.jpg)
 
-# Airborne Object Tracking Starter Kit
+# Airborne Object Tracking Challenge Starter Kit
 
 👉 [Challenge page](https://www.aicrowd.com/challenges/airborne-object-tracking-challenge?utm_source=starter-kit&utm_medium=click&utm_campaign=prime-air)
 
-[![Discord](https://img.shields.io/discord/565639094860775436.svg)](https://discord.gg/BT9uegr)
+[![Discord](https://img.shields.io/discord/565639094860775436.svg)](https://discord.gg/hAuevqx9Tj)
 
 
-This repository is the main Airborne Object Tracking challenge **submission template and starter kit**! 
+This repository is the main Airborne Object Tracking challenge **Submission template and Starter kit**! 
 
 Clone the repository to compete now!
 
 **This repository contains**:
 *  **Documentation** on how to submit your agent to the leaderboard
-*  **The procedure** for best practices and how we evaluate your agent, etc.
+*  **The procedure** for best practices and information on how we evaluate your agent, etc.
 *  **Starter code** for you to get started!
 
 
@@ -35,7 +35,7 @@ Clone the repository to compete now!
 
 #  Competition Procedure
 
-The main task of the competition is to detect a collision threat reliability. In this challenge you will train your agents locally and then upload them to AIcrowd (via git) to be evaluated. 
+The main task of the competition is to detect a collision threat reliably. In this challenge, you will train your agents locally and then upload them to AIcrowd (via git) to be evaluated. 
 
 **The following is a high level description of how this round works**
 
