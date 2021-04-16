@@ -42,9 +42,9 @@ The main task of the competition is to detect a collision threat reliably. In th
 ![](https://i.imgur.com/xzQkwKV.jpg)
 
 1. **Sign up** to join the competition [on the AIcrowd website].(https://www.aicrowd.com/challenges/airborne-object-tracking-challenge)
-2. **Clone** this repo and start developing your submissions.
+2. **Clone** this repo and start developing your solution.
 3. **Train** your models to detect objects and write inference code in `test.py`.
-4. [**Submit**](#how-to-submit-a-model) your trained models to [AIcrowd Gitlab](https://gitlab.aicrowd.com) for evaluation [(full instructions below)](#how-to-submit-a-model).  The automated evaluation setup will evaluate the submissions against the test dataset, to compute and report the metrics on the leaderboard of the competition.
+4. [**Submit**](#how-to-submit-a-model) your trained models to [AIcrowd Gitlab](https://gitlab.aicrowd.com) for evaluation [(full instructions below)](#how-to-submit-a-model). The automated evaluation setup will evaluate the submissions against the test dataset to compute and report the metrics on the leaderboard of the competition.
 
 # How to access and use dataset
 
@@ -81,20 +81,20 @@ You can add your SSH Keys to your GitLab account by going to your profile settin
 
 We accept submissions with custom runtime, so you don't need to worry about which libraries or framework to pick from.
 
-The configuration files typically includes `requirements.txt` (pypi packages), `environment.yml` (conda environment), `apt.txt` (apt packages) or even your own `Dockerfile`.
+The configuration files typically include `requirements.txt` (pypi packages), `environment.yml` (conda environment), `apt.txt` (apt packages) or even your own `Dockerfile`.
 
-You can check detailed information about the same in 👉 [RUNTIME.md](/docs/RUNTIME.md) file.
+You can check detailed information about the same in the 👉 [RUNTIME.md](/docs/RUNTIME.md) file.
 
 ## What should my code structure be like ?
 
-Please follow the example structure shared in the starter kit for the code structure.
+Please follow the example structure as it is in the starter kit for the code structure.
 The different files and directories have following meaning:
 
 ```
 .
-├── aicrowd.json           # Submission meta information like your username
+├── aicrowd.json           # Submission meta information - like your username
 ├── apt.txt                # Packages to be installed inside docker image
-├── data                   # Your local dataset copy, you don't need to upload it (read DATASET.md)
+├── data                   # Your local dataset copy - you don't need to upload it (read DATASET.md)
 ├── requirements.txt       # Python packages to be installed
 ├── test.py                # IMPORTANT: Your testing/inference phase code, must be derived from AirbornePredictor (example in test.py)
 └── utility                # The utility scripts to provide smoother experience to you.
@@ -118,7 +118,7 @@ The `aicrowd.json` of each submission should contain the following content:
 }
 ```
 
-This JSON is used to map your submission to the said challenge, so please remember to use the correct `challenge_id` as specified above.
+This JSON is used to map your submission to the challenge - so please remember to use the correct `challenge_id` as specified above.
 
 Please specify if your code will use a GPU or not for the evaluation of your model. If you specify `true` for the GPU, GPU will be provided and used for the evaluation.
 
@@ -133,7 +133,7 @@ Please specify if your code will use a GPU or not for the evaluation of your mod
 
 ## Time constraints
 
-You need to make sure that your model can predict airborne objects for each flight within 1000 second, otherwise the submission will be mark as failed. (_need revision on timeouts based on budget_)
+You need to make sure that your model can predict airborne objects for each flight within 1000 seconds, otherwise the submission will be marked as failed. (_need revision on timeouts based on budget_)
 
 ## Local evaluation
 
