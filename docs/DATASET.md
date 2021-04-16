@@ -122,8 +122,8 @@ This library will provide you quick access and download only the files you requi
 ```python
 from core.dataset import Dataset
 dataset = Dataset(local_path='data/part1', s3_path='s3://airborne-obj-detection-challenge-training/part1/')
-dataset.add(local_path='data/part1', s3_path='s3://airborne-obj-detection-challenge-training/part1/')
-dataset.add(local_path='data/part1', s3_path='s3://airborne-obj-detection-challenge-training/part1/')
+dataset.add(local_path='data/part2', s3_path='s3://airborne-obj-detection-challenge-training/part2/')
+dataset.add(local_path='data/part3', s3_path='s3://airborne-obj-detection-challenge-training/part3/')
 ```
 
 NOTE: You don't need to have `groundtruth.json` pre-downloaded, it will automatically download, save and load them for you.

@@ -67,7 +67,7 @@ You can add your SSH Keys to your GitLab account by going to your profile settin
 
 3. **Install** competition specific dependencies!
     ```
-    cd airborne_detection_starter_kit
+    cd airborne-detection-starter-kit
     pip3 install -r requirements.txt
     ```
 
@@ -137,9 +137,8 @@ You need to make sure that your model can predict airborne objects for each flig
 
 ## Local evaluation
 
-You can also test end to end evaluation on your own systems. This step will provide you random scores.
+You can also test end to end evaluation on your own systems. The scripts are available in `core/metrics` folder.
 
-TBA
 
 # 📎 Important links
 

@@ -8,3 +8,5 @@ opencv-python<4.3
 bounding-box
 numpy
 Pillow
+imgaug
+core/metrics
