@@ -1,4 +1,4 @@
-![Airborne Banner](https://i.imgur.com/noxkEgb.png)
+![Airborne Banner](https://i.imgur.com/MxW7ySd.jpg)
 
 # Airborne Object Tracking Starter Kit
 
