@@ -9,4 +9,4 @@ bounding-box
 numpy
 Pillow
 imgaug
-core/metrics
+git+https://gitlab.aicrowd.com/amazon-prime-air/airborne-detection-starter-kit.git#subdirectory=core/metrics
